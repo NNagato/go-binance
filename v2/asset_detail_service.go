@@ -93,16 +93,25 @@ type CoinInfo struct {
 
 type Network struct {
 	AddressRegex            string `json:"addressRegex"`
+	AddressRule             string `json:"addressRule"`
+	Busy                    bool   `json:"busy"`
 	Coin                    string `json:"coin"`
+	ContractAddress         string `json:"contractAddress"`
+	ContractAddressUrl      string `json:"contractAddressUrl"`
+	Country                 string `json:"country"`
 	DepositDesc             string `json:"depositDesc,omitempty"` // 仅在充值关闭时返回
 	DepositEnable           bool   `json:"depositEnable"`
+	EntityTag               string `json:"entityTag"`
+	EstimatedArrivalTime    int    `json:"estimatedArrivalTime"`
 	IsDefault               bool   `json:"isDefault"`
 	MemoRegex               string `json:"memoRegex"`
 	MinConfirm              int    `json:"minConfirm"` // 上账所需的最小确认数
 	Name                    string `json:"name"`
 	Network                 string `json:"network"`
 	ResetAddressStatus      bool   `json:"resetAddressStatus"`
+	SameAddress             bool   `json:"sameAddress"` // 是否需要memo
 	SpecialTips             string `json:"specialTips"`
+	SpecialWithdrawTips     string `json:"specialWithdrawTips"`
 	UnLockConfirm           int    `json:"unLockConfirm"`          // 解锁需要的确认数
 	WithdrawDesc            string `json:"withdrawDesc,omitempty"` // 仅在提现关闭时返回
 	WithdrawEnable          bool   `json:"withdrawEnable"`
@@ -110,7 +119,6 @@ type Network struct {
 	WithdrawIntegerMultiple string `json:"withdrawIntegerMultiple"`
 	WithdrawMax             string `json:"withdrawMax"`
 	WithdrawMin             string `json:"withdrawMin"`
-	SameAddress             bool   `json:"sameAddress"` // 是否需要memo
 }
 
 // GetUserAssetService Get user assets
