@@ -15,8 +15,9 @@ import (
 	"os"
 	"time"
 
-	"github.com/adshao/go-binance/v2/common"
 	"github.com/bitly/go-simplejson"
+
+	"github.com/adshao/go-binance/v2/common"
 )
 
 // SideType define side type of order
@@ -359,6 +360,12 @@ func (c *Client) callAPI(ctx context.Context, r *request, opts ...RequestOption)
 	return data, &res.Header, nil
 }
 
+// SetApiEndpoint set api Endpoint
+func (c *Client) SetApiEndpoint(url string) *Client {
+	c.BaseURL = url
+	return c
+}
+
 // NewPingService init ping service
 func (c *Client) NewPingService() *PingService {
 	return &PingService{c: c}
@@ -392,6 +399,11 @@ func (c *Client) NewRecentTradesService() *RecentTradesService {
 // NewKlinesService init klines service
 func (c *Client) NewKlinesService() *KlinesService {
 	return &KlinesService{c: c}
+}
+
+// NewContinuousKlinesService init continuous klines service
+func (c *Client) NewContinuousKlinesService() *ContinuousKlinesService {
+	return &ContinuousKlinesService{c: c}
 }
 
 // NewIndexPriceKlinesService init index price klines service
@@ -567,6 +579,16 @@ func (c *Client) NewChangePositionModeService() *ChangePositionModeService {
 // NewGetPositionModeService init get position mode service
 func (c *Client) NewGetPositionModeService() *GetPositionModeService {
 	return &GetPositionModeService{c: c}
+}
+
+// NewChangeMultiAssetModeService init change multi-asset mode service
+func (c *Client) NewChangeMultiAssetModeService() *ChangeMultiAssetModeService {
+	return &ChangeMultiAssetModeService{c: c}
+}
+
+// NewGetMultiAssetModeService init get multi-asset mode service
+func (c *Client) NewGetMultiAssetModeService() *GetMultiAssetModeService {
+	return &GetMultiAssetModeService{c: c}
 }
 
 // NewGetRebateNewUserService init get rebate_newuser service
