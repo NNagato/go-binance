@@ -101,6 +101,8 @@ func (s *accountServiceTestSuite) TestGetAccount() {
 				"positionAmt": "0.436",
 				"bidNotional": "0",
 				"askNotional": "0",
+				"notional":"0.1234",
+				"isolatedWallet":"0.5678",
 				"updateTime":1618646402359
 			 }
 		 ],
@@ -163,6 +165,8 @@ func (s *accountServiceTestSuite) TestGetAccount() {
 				PositionAmt:            "0.436",
 				BidNotional:            "0",
 				AskNotional:            "0",
+				Notional:               "0.1234",
+				IsolatedWallet:         "0.5678",
 				UpdateTime:             1618646402359,
 			},
 		},
@@ -229,6 +233,8 @@ func (s *accountServiceTestSuite) assertAccountEqual(e, a *Account) {
 		r.Equal(e.Positions[i].PositionAmt, a.Positions[i].PositionAmt, "PositionAmt")
 		r.Equal(e.Positions[i].BidNotional, a.Positions[i].BidNotional, "BidNotional")
 		r.Equal(e.Positions[i].AskNotional, a.Positions[i].AskNotional, "AskNotional")
+		r.Equal(e.Positions[i].Notional, a.Positions[i].Notional, "Notional")
+		r.Equal(e.Positions[i].IsolatedWallet, a.Positions[i].IsolatedWallet, "IsolatedWallet")
 		r.Equal(e.Positions[i].UpdateTime, a.Positions[i].UpdateTime, "UpdateTime")
 	}
 }
