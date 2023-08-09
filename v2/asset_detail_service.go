@@ -42,8 +42,7 @@ func (s *GetAssetDetailService) Do(ctx context.Context) (res map[string]AssetDet
 }
 
 type GetAllCoinsInfoService struct {
-	c     *Client
-	asset *string
+	c *Client
 }
 
 // Do send request
