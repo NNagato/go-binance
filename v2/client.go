@@ -7,7 +7,7 @@ import (
 	"crypto/sha256"
 	"crypto/tls"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"net/url"
@@ -408,7 +408,7 @@ func (c *Client) callAPI(ctx context.Context, r *request, opts ...RequestOption)
 	if err != nil {
 		return []byte{}, err
 	}
-	data, err = ioutil.ReadAll(res.Body)
+	data, err = io.ReadAll(res.Body)
 	if err != nil {
 		return []byte{}, err
 	}
@@ -651,21 +651,6 @@ func (c *Client) NewAveragePriceService() *AveragePriceService {
 	return &AveragePriceService{c: c}
 }
 
-// NewMarginTransferService init margin account transfer service
-func (c *Client) NewMarginTransferService() *MarginTransferService {
-	return &MarginTransferService{c: c}
-}
-
-// NewMarginLoanService init margin account loan service
-func (c *Client) NewMarginLoanService() *MarginLoanService {
-	return &MarginLoanService{c: c}
-}
-
-// NewMarginRepayService init margin account repay service
-func (c *Client) NewMarginRepayService() *MarginRepayService {
-	return &MarginRepayService{c: c}
-}
-
 // NewCreateMarginOrderService init creating margin order service
 func (c *Client) NewCreateMarginOrderService() *CreateMarginOrderService {
 	return &CreateMarginOrderService{c: c}
@@ -691,16 +676,6 @@ func (c *Client) NewGetMarginOrderService() *GetMarginOrderService {
 	return &GetMarginOrderService{c: c}
 }
 
-// NewListMarginLoansService init list margin loan service
-func (c *Client) NewListMarginLoansService() *ListMarginLoansService {
-	return &ListMarginLoansService{c: c}
-}
-
-// NewListMarginRepaysService init list margin repay service
-func (c *Client) NewListMarginRepaysService() *ListMarginRepaysService {
-	return &ListMarginRepaysService{c: c}
-}
-
 // NewGetMarginAccountService init get margin account service
 func (c *Client) NewGetMarginAccountService() *GetMarginAccountService {
 	return &GetMarginAccountService{c: c}
@@ -709,20 +684,6 @@ func (c *Client) NewGetMarginAccountService() *GetMarginAccountService {
 // NewGetIsolatedMarginAccountService init get isolated margin asset service
 func (c *Client) NewGetIsolatedMarginAccountService() *GetIsolatedMarginAccountService {
 	return &GetIsolatedMarginAccountService{c: c}
-}
-
-func (c *Client) NewIsolatedMarginTransferService() *IsolatedMarginTransferService {
-	return &IsolatedMarginTransferService{c: c}
-}
-
-// NewGetMarginAssetService init get margin asset service
-func (c *Client) NewGetMarginAssetService() *GetMarginAssetService {
-	return &GetMarginAssetService{c: c}
-}
-
-// NewGetMarginPairService init get margin pair service
-func (c *Client) NewGetMarginPairService() *GetMarginPairService {
-	return &GetMarginPairService{c: c}
 }
 
 // NewGetMarginAllPairsService init get margin all pairs service
@@ -1008,4 +969,9 @@ func (c *Client) NewManagedSubAccountAssetsService() *ManagedSubAccountAssetsSer
 // NewSubAccountFuturesAccountService Get Detail on Sub-account's Futures Account (For Master Account)
 func (c *Client) NewSubAccountFuturesAccountService() *SubAccountFuturesAccountService {
 	return &SubAccountFuturesAccountService{c: c}
+}
+
+// NewMarginCollateralRateService get margin collateral rate
+func (c *Client) NewMarginCollateralRateService() *MarginCollateralRateService {
+	return &MarginCollateralRateService{c: c}
 }
