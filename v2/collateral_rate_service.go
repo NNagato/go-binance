@@ -22,7 +22,7 @@ func (s *MarginCollateralRateService) Do(ctx context.Context, opts ...RequestOpt
 	}
 
 	res := make([]MarginCollateralRate, 0)
-	err = json.Unmarshal(data, res)
+	err = json.Unmarshal(data, &res)
 	if err != nil {
 		return nil, err
 	}
