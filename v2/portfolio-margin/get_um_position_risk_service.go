@@ -17,7 +17,7 @@ func (s *GetUMPositionRiskService) Symbol(symbol string) *GetUMPositionRiskServi
 }
 
 // Do sends the request to get the account balance
-func (s *GetUMPositionRiskService) Do(ctx context.Context, opts ...RequestOption) (res []PositonRisk, err error) {
+func (s *GetUMPositionRiskService) Do(ctx context.Context, opts ...RequestOption) (res []PositionRisk, err error) {
 	r := &request{
 		method:   http.MethodGet,
 		endpoint: "/papi/v1/um/positionRisk",
@@ -31,7 +31,7 @@ func (s *GetUMPositionRiskService) Do(ctx context.Context, opts ...RequestOption
 	if err != nil {
 		return nil, err
 	}
-	res = make([]PositonRisk, 0)
+	res = make([]PositionRisk, 0)
 	err = json.Unmarshal(data, &res)
 	if err != nil {
 		return nil, err
@@ -39,7 +39,7 @@ func (s *GetUMPositionRiskService) Do(ctx context.Context, opts ...RequestOption
 	return res, nil
 }
 
-type PositonRisk struct {
+type PositionRisk struct {
 	EntryPrice       string `json:"entryPrice"`
 	Leverage         string `json:"leverage"`
 	MarkPrice        string `json:"markPrice"`
