@@ -59,7 +59,7 @@ type UMOrder struct {
 	CumQty                  string                  `json:"cumQty"`
 	CumQuote                string                  `json:"cumQuote"`
 	ExecutedQty             string                  `json:"executedQty"`
-	OrderID                 int                     `json:"orderId"`
+	OrderID                 int64                   `json:"orderId"`
 	AvgPrice                string                  `json:"avgPrice"`
 	OrigQty                 string                  `json:"origQty"`
 	Price                   string                  `json:"price"`
