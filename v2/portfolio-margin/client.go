@@ -157,11 +157,12 @@ const (
 	ContractTypeNextQuarter         ContractType = "NEXT_QUARTER"
 	ContractTypePerpetualDelivering ContractType = "PERPETUAL_DELIVERING"
 
-	UserDataEventTypeListenKeyExpired    UserDataEventType = "listenKeyExpired"
-	UserDataEventTypeMarginCall          UserDataEventType = "MARGIN_CALL"
-	UserDataEventTypeAccountUpdate       UserDataEventType = "ACCOUNT_UPDATE"
-	UserDataEventTypeOrderTradeUpdate    UserDataEventType = "ORDER_TRADE_UPDATE"
-	UserDataEventTypeAccountConfigUpdate UserDataEventType = "ACCOUNT_CONFIG_UPDATE"
+	UserDataEventTypeListenKeyExpired        UserDataEventType = "listenKeyExpired"
+	UserDataEventTypeMarginCall              UserDataEventType = "MARGIN_CALL"
+	UserDataEventTypeAccountUpdate           UserDataEventType = "ACCOUNT_UPDATE"
+	UserDataEventTypeOrderTradeUpdate        UserDataEventType = "ORDER_TRADE_UPDATE"
+	UserDataEventTypeAccountConfigUpdate     UserDataEventType = "ACCOUNT_CONFIG_UPDATE"
+	UserDataEventTypeOutboundAccountPosition UserDataEventType = "outboundAccountPosition"
 
 	UserDataEventReasonTypeDeposit             UserDataEventReasonType = "DEPOSIT"
 	UserDataEventReasonTypeWithdraw            UserDataEventReasonType = "WITHDRAW"
