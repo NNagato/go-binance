@@ -49,8 +49,8 @@ type Leverage struct {
 type Bracket struct {
 	Bracket          int     `json:"bracket"`
 	InitialLeverage  int     `json:"initialLeverage"`
-	NotionalCap      int     `json:"notionalCap"`
-	NotionalFloor    int     `json:"notionalFloor"`
+	NotionalCap      float64 `json:"notionalCap"`
+	NotionalFloor    float64 `json:"notionalFloor"`
 	MaintMarginRatio float64 `json:"maintMarginRatio"`
-	Cum              int     `json:"cum"`
+	Cum              float64 `json:"cum"`
 }
