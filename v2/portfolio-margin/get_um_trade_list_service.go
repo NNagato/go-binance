@@ -78,8 +78,8 @@ func (s *GetUMTradeList) Do(ctx context.Context, opts ...RequestOption) (res []T
 
 type Trade struct {
 	Symbol          string `json:"symbol"`
-	ID              int    `json:"id"`
-	OrderID         int    `json:"orderId"`
+	ID              int64  `json:"id"`
+	OrderID         int64  `json:"orderId"`
 	Side            string `json:"side"`
 	Price           string `json:"price"`
 	Qty             string `json:"qty"`
