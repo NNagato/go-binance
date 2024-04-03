@@ -119,3 +119,13 @@ func (c *Client) NewKeepAliveUserStreamDataService() *KeepAliveUserStreamDataSer
 func (c *Client) NewCloseUserStreamDataService() *CloseUserStreamDataService {
 	return &CloseUserStreamDataService{c: c}
 }
+
+// NewFundingCollectionService
+func (c *Client) NewFundingCollectionService() *FundingCollectionService {
+	return &FundingCollectionService{c: c}
+}
+
+// NewFundAutoCollectionService
+func (c *Client) NewFundAutoCollectionService() *FundAutoCollectionService {
+	return &FundAutoCollectionService{c: c}
+}
