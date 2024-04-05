@@ -129,3 +129,13 @@ func (c *Client) NewFundingCollectionService() *FundingCollectionService {
 func (c *Client) NewFundAutoCollectionService() *FundAutoCollectionService {
 	return &FundAutoCollectionService{c: c}
 }
+
+// NewGetAutoRepayFuturesStatusService
+func (c *Client) NewGetAutoRepayFuturesStatusService() *GetAutoRepayFuturesStatusService {
+	return &GetAutoRepayFuturesStatusService{c: c}
+}
+
+// NewChangeAutoRepayFuturesStatusService
+func (c *Client) NewChangeAutoRepayFuturesStatusService() *ChangeAutoRepayFuturesStatusService {
+	return &ChangeAutoRepayFuturesStatusService{c: c}
+}
