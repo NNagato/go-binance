@@ -2,6 +2,7 @@ package binance
 
 import (
 	"net/http"
+	"net/url"
 	"time"
 
 	"github.com/gorilla/websocket"
@@ -16,19 +17,29 @@ type ErrHandler func(err error)
 // WsConfig webservice configuration
 type WsConfig struct {
 	Endpoint string
+	Proxy    *string
 }
 
 func newWsConfig(endpoint string) *WsConfig {
 	return &WsConfig{
 		Endpoint: endpoint,
+		Proxy:    getWsProxyUrl(),
 	}
 }
 
 var wsServe = func(cfg *WsConfig, handler WsHandler, errHandler ErrHandler) (doneC, stopC chan struct{}, err error) {
+	proxy := http.ProxyFromEnvironment
+	if cfg.Proxy != nil {
+		u, err := url.Parse(*cfg.Proxy)
+		if err != nil {
+			return nil, nil, err
+		}
+		proxy = http.ProxyURL(u)
+	}
 	Dialer := websocket.Dialer{
-		Proxy:             http.ProxyFromEnvironment,
+		Proxy:             proxy,
 		HandshakeTimeout:  45 * time.Second,
-		EnableCompression: false,
+		EnableCompression: true,
 	}
 
 	c, _, err := Dialer.Dial(cfg.Endpoint, nil)
@@ -42,10 +53,14 @@ var wsServe = func(cfg *WsConfig, handler WsHandler, errHandler ErrHandler) (don
 		// This function will exit either on error from
 		// websocket.Conn.ReadMessage or when the stopC channel is
 		// closed by the client.
+
 		defer close(doneC)
 		if WebsocketKeepalive {
+			// This function overwrites the default ping frame handler
+			// sent by the websocket API server
 			keepAlive(c, WebsocketTimeout)
 		}
+
 		// Wait for the stopC channel to be closed.  We do that in a
 		// separate goroutine because ReadMessage is a blocking
 		// operation.
@@ -84,7 +99,7 @@ func keepAlive(c *websocket.Conn, timeout time.Duration) {
 	go func() {
 		defer ticker.Stop()
 		for {
-			deadline := time.Now().Add(10 * time.Second)
+			deadline := time.Now().Add(KeepAlivePingDeadline)
 			err := c.WriteControl(websocket.PingMessage, []byte{}, deadline)
 			if err != nil {
 				return
@@ -96,4 +111,28 @@ func keepAlive(c *websocket.Conn, timeout time.Duration) {
 			}
 		}
 	}()
+}
+
+var WsGetReadWriteConnection = func(cfg *WsConfig) (*websocket.Conn, error) {
+	proxy := http.ProxyFromEnvironment
+	if cfg.Proxy != nil {
+		u, err := url.Parse(*cfg.Proxy)
+		if err != nil {
+			return nil, err
+		}
+		proxy = http.ProxyURL(u)
+	}
+
+	Dialer := websocket.Dialer{
+		Proxy:             proxy,
+		HandshakeTimeout:  45 * time.Second,
+		EnableCompression: false,
+	}
+
+	c, _, err := Dialer.Dial(cfg.Endpoint, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return c, nil
 }
